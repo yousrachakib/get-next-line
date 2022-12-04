@@ -6,7 +6,7 @@
 /*   By: yochakib <yochakib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 16:50:22 by yochakib          #+#    #+#             */
-/*   Updated: 2022/11/27 17:37:34 by yochakib         ###   ########.fr       */
+/*   Updated: 2022/12/04 15:50:07 by yochakib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,29 +37,14 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	return (substr);
 }
 
-void	ft_bzero(void *s, size_t n)
+size_t	ft_strlen(char *s)
 {
 	size_t	i;
-	char	*str;
 
 	i = 0;
-	str = (char *)s;
-	while (i < n)
-	{
-		str[i] = 0;
+	while (s[i])
 		i++;
-	}
-}
-
-void	*ft_calloc(size_t count, size_t size)
-{
-	void	*ptr;
-
-	ptr = malloc(size * count);
-	if (!ptr)
-		return (0);
-	ft_bzero(ptr, count * size);
-	return (ptr);
+	return (i);
 }
 
 char	*ft_strjoin(char *s1, char *s2)
