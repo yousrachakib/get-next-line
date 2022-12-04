@@ -6,7 +6,7 @@
 /*   By: yochakib <yochakib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 17:31:19 by yochakib          #+#    #+#             */
-/*   Updated: 2022/12/04 15:49:08 by yochakib         ###   ########.fr       */
+/*   Updated: 2022/12/04 16:52:42 by yochakib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	detect_newline(char *s)
 	return (-1);
 }
 
-char	ft_line(char *res)
+char	*ft_line(char *res)
 {
 	char	*line;
 	int		len;
@@ -103,7 +103,7 @@ char	*get_next_line(int fd)
 	char		*line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
-		return (NULL);
+		return (0);
 	res = ft_read(fd, res);
 	if (!res)
 		return (NULL);

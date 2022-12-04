@@ -6,7 +6,7 @@
 /*   By: yochakib <yochakib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 16:50:22 by yochakib          #+#    #+#             */
-/*   Updated: 2022/12/04 15:50:07 by yochakib         ###   ########.fr       */
+/*   Updated: 2022/12/04 16:47:42 by yochakib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,35 +16,42 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	char	*substr;
 	size_t	i;
+	size_t	s_len;
 
-	i = 0;
 	if (!s)
-		return (0);
-	if (start >= ft_strlen(s))
-		return (ft_strdup(""));
-	if (len >= ft_strlen(s))
-		substr = (char *)malloc(sizeof(char) * (ft_strlen(s) + 1));
-	else
-		substr = (char *)malloc(sizeof(char) * (len + 1));
+		return (NULL);
+	s_len = ft_strlen(s);
+	if (len < 0)
+		return (NULL);
+	if (len > s_len)
+		len = s_len;
+	substr = (char *)malloc(sizeof(char) * (len + 1));
 	if (!substr)
-		return (0);
-	while (i < len)
+		return (NULL);
+	i = 0;
+	if (start < s_len)
 	{
-		substr[i] = s[i];
-		i++;
+		while (i < len && s[start])
+		{
+			substr[i++] = s[start];
+			start++;
+		}
 	}
-	substr[i] = '\0';
+	substr[i] = 0;
 	return (substr);
 }
 
-size_t	ft_strlen(char *s)
+size_t	ft_strlen(const char *s)
 {
-	size_t	i;
+	size_t	len;
 
-	i = 0;
-	while (s[i])
-		i++;
-	return (i);
+	len = 0;
+	if (s != NULL)
+	{
+		while (s[len])
+			len++;
+	}
+	return (len);
 }
 
 char	*ft_strjoin(char *s1, char *s2)
@@ -60,18 +67,18 @@ char	*ft_strjoin(char *s1, char *s2)
 	str = malloc(sizeof(char) * (ft_strlen(s1)+ft_strlen(s2)+1));
 	if (!str)
 		return (0);
-	while (i < ft_strlen(s1))
+	while (s1[i])
 	{
 		str[i] = s1[i];
 		i++;
 	}
-	while (j < ft_strlen(s2))
+	while (s2[j])
 	{
-		str[i + j] = s2[j];
+		str[i++] = s2[j];
 		j++;
 	}
-	str[i + j] = '\0';
-	free((void *)s1);
+	str[i] = '\0';
+	free(s1);
 	s1 = NULL;
 	return (str);
 }
@@ -83,7 +90,7 @@ char	*ft_strdup(const char *s)
 
 	i = 0;
 	if (!s)
-		return (0);
+		return (NULL);
 	str = malloc(sizeof(char) * (ft_strlen(s) + 1));
 	if (!str)
 		return (0);
